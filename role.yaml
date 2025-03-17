@@ -38,3 +38,17 @@ rules:
   # objects is "secrets"
   resources: ["nodes","persistentvolumes"]
   verbs: ["get", "watch", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+# This cluster role binding allows anyone in the "manager" group to read secrets in any namespace.
+kind: ClusterRoleBinding
+metadata:
+  name: default-trainee
+subjects:
+- kind: User
+  name: suresh # "name" is case sensitive
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: default-trainee
+  apiGroup: rbac.authorization.k8s.io
